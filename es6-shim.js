@@ -43,6 +43,7 @@ if (!String.prototype.toArray) {
 
 
 //----------------- Arrays
+// http://www.2ality.com/2011/07/array-from.html
 
 if (!Array.from) {
     Array.from = function(arrayLike) {
