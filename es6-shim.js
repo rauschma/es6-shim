@@ -9,7 +9,7 @@
     "use strict";
 
     function method(obj, name, method) {
-        if (!obj[methodName]) {
+        if (!obj[name]) {
             Object.defineProperty(obj, name, { configurable: true, enumerable: false, writable: true, value: method });
         }
     }
