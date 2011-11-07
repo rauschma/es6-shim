@@ -60,21 +60,18 @@
 
     //----------------- Number
 
-    var abs = Math.abs,
-        floor = Math.floor,
-        isFinite = global.isFinite,
-        isNaN = global.isNaN;
-        
-    function sign(n) { return (n < 0) ? -1 : 1; }
+    function sign(n) { return (n < 0) ? -1 : 1 }
 
     //// http://wiki.ecmascript.org/doku.php?id=harmony:number.tointeger
     method(Number, "toInteger", function (value) {
         var n = +value;
-        if (isNaN(n))
+        if (isNaN(n)) {
             return +0;
-        if (n === 0 || !isFinite(n))
+        }
+        if (n === 0 || !isFinite(n)) {
             return n;
-        return sign(n) * floor(abs(n));
+        }
+        return sign(n) * Math.floor(Math.abs(n));
     });
 
     //----------------- Object
