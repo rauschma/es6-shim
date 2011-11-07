@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Jasmine Spec Runner</title>
+
+        <link rel="stylesheet" href="lib/jasmine-1.1.0/jasmine.css">
+        <script src="lib/jasmine-1.1.0/jasmine.js"></script>
+        <script src="lib/jasmine-1.1.0/jasmine-html.js"></script>
+
+        <!-- specs -->
+        <script type="text/javascript" src="specs/String.prototype.js"></script>
+
+        <!-- system under test -->
+        <script type="text/javascript" src="../es6-shim.js"></script>
+
+        <script type="text/javascript">
+            (function () {
+                var jasmineEnv = jasmine.getEnv();
+                jasmineEnv.updateInterval = 1000;
+
+                var trivialReporter = new jasmine.TrivialReporter();
+
+                jasmineEnv.addReporter(trivialReporter);
+                jasmineEnv.specFilter = trivialReporter.specFilter.bind(trivialReporter);
+
+                window.onload = jasmineEnv.execute.bind(jasmineEnv);
+            })();
+        </script>
+    </head>
+
+    <body>
+    </body>
+</html>

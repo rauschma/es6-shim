@@ -26,6 +26,7 @@
 
     methods(String.prototype, {
         repeat: function (times) {
+            times = Math.max(Number.toInteger(times), 0);
             return new Array(times + 1).join(this);
         },
         startsWith: function (s) {
@@ -33,7 +34,8 @@
         },
         endsWith: function (s) {
             var t = String(s);
-            return this.lastIndexOf(t) === this.length - t.length;
+            var index = this.lastIndexOf(t);
+            return index >= 0 && index === this.length - t.length;
         },
         contains: function (s) {
             return this.indexOf(s) !== -1;
