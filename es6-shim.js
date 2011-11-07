@@ -1,8 +1,8 @@
 // None of this code is mine, most of it is taken from the esnext wiki
 // (sometimes with minor modifications)
 
-TODO: http://wiki.ecmascript.org/doku.php?id=harmony:proposals - API improvements
-TODO: http://www.2ality.com/2011/11/uncurrying-this.html
+// TODO: http://wiki.ecmascript.org/doku.php?id=harmony:proposals - API improvements
+// TODO: http://www.2ality.com/2011/11/uncurrying-this.html
 
 //----------------- Strings
 
