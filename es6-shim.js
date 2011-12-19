@@ -23,6 +23,7 @@
     //----------------- String.prototype
     //// http://wiki.ecmascript.org/doku.php?id=harmony:string.prototype.repeat
     //// http://wiki.ecmascript.org/doku.php?id=harmony:string_extras
+    //// http://blogs.msdn.com/b/ie/archive/2011/11/22/evolving-ecmascript.aspx
 
     methods(String.prototype, {
         repeat: function (times) {
@@ -59,10 +60,20 @@
     });
 
     //----------------- Number
+    //// http://blogs.msdn.com/b/ie/archive/2011/11/22/evolving-ecmascript.aspx
+    //// http://wiki.ecmascript.org/doku.php?id=harmony:number.isfinite
+    //// http://wiki.ecmascript.org/doku.php?id=harmony:number.isinteger
+    //// http://wiki.ecmascript.org/doku.php?id=harmony:number.isnan
+    //// http://wiki.ecmascript.org/doku.php?id=harmony:number.tointeger
+
+    methods(Number, {
+        isFinite: function (value) {
+            return typeof value === "number" && global.isFinite(value);
+        }
+    });
 
     function sign(n) { return (n < 0) ? -1 : 1 }
 
-    //// http://wiki.ecmascript.org/doku.php?id=harmony:number.tointeger
     method(Number, "toInteger", function (value) {
         var n = +value;
         if (isNaN(n)) {
