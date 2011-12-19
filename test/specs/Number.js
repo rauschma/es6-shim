@@ -58,3 +58,51 @@ describe("Number.isNaN", function () {
         expect(Number.isNaN('not a number')).toBe(false);
     });
 });
+
+describe("Number.toInteger", function () {
+    beforeEach(function () {
+        this.addMatchers({
+            toReallyBe: function (expected) {
+                return Object.is(this.actual, expected);
+            }
+        });
+    });
+
+    it("should pass through unexceptional integers with no change", function () {
+        expect(Number.toInteger(1)).toReallyBe(1);
+        expect(Number.toInteger(-100)).toReallyBe(-100);
+    });
+
+    it("should pass through +0, -0, +Infinity, or -Infinity with no change", function () {
+        expect(Number.toInteger(+0)).toReallyBe(+0);
+        expect(Number.toInteger(-0)).toReallyBe(-0);
+        expect(Number.toInteger(+Infinity)).toReallyBe(+Infinity);
+        expect(Number.toInteger(-Infinity)).toReallyBe(-Infinity);
+    });
+
+    it("should return +0 when given NaN, undefined, null, or false", function () {
+        expect(Number.toInteger(NaN)).toReallyBe(+0);
+        expect(Number.toInteger(undefined)).toReallyBe(+0);
+        expect(Number.toInteger(null)).toReallyBe(+0);
+        expect(Number.toInteger(false)).toReallyBe(+0);
+    });
+
+    it("should convert string arguments to integers in various formats", function () {
+        expect(Number.toInteger("1")).toReallyBe(1);
+        expect(Number.toInteger(" 1 ")).toReallyBe(1);
+        expect(Number.toInteger("+1.1")).toReallyBe(1);
+        expect(Number.toInteger("-1.1")).toReallyBe(-1);
+        expect(Number.toInteger("0xABC")).toReallyBe(0xABC);
+        expect(Number.toInteger("1e100")).toReallyBe(1e100);
+        expect(Number.toInteger("+0")).toReallyBe(+0);
+        expect(Number.toInteger("-0")).toReallyBe(-0);
+        expect(Number.toInteger("Infinity")).toReallyBe(+Infinity);
+        expect(Number.toInteger("-Infinity")).toReallyBe(-Infinity);
+    });
+
+    it("should convert object arguments using valueOf and toString", function () {
+        expect(Number.toInteger({ valueOf: function () { return "1"; } })).toReallyBe(1);
+        expect(Number.toInteger({ toString: function () { return " 1 "; } })).toReallyBe(1);
+        expect(Number.toInteger({ toString: function () { return 1; }, valueOf: function () { return 0; } })).toReallyBe(0);
+    });
+});

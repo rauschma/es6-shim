@@ -68,6 +68,10 @@
 
     var INTEGER_CUTOFF = 0x20000000000000;
 
+    function sign(n) {
+        return n < 0 ? -1 : 1;
+    }
+
     methods(Number, {
         isFinite: function (value) {
             return typeof value === "number" && global.isFinite(value);
@@ -79,20 +83,17 @@
         },
         isNaN: function (value) {
             return typeof value === "number" && global.isNaN(value);
+        },
+        toInteger: function (value) {
+            var n = +value;
+            if (global.isNaN(n)) {
+                return +0;
+            }
+            if (n === 0 || !global.isFinite(n)) {
+                return n;
+            }
+            return sign(n) * Math.floor(Math.abs(n));
         }
-    });
-
-    function sign(n) { return (n < 0) ? -1 : 1 }
-
-    method(Number, "toInteger", function (value) {
-        var n = +value;
-        if (isNaN(n)) {
-            return +0;
-        }
-        if (n === 0 || !isFinite(n)) {
-            return n;
-        }
-        return sign(n) * Math.floor(Math.abs(n));
     });
 
     //----------------- Object
