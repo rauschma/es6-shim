@@ -21,7 +21,7 @@ describe("Number.isInteger", function () {
         expect(Number.isInteger(1.0)).toBe(true);
     });
     it("should give `false` when used on decimals", function () {
-        expect(Number.isInteger(1.001)).toBe(false);
+        expect(Number.isInteger(Math.PI)).toBe(false);
         expect(Number.isInteger(-1/3)).toBe(false);
     });
     it("should give `false` when used on values outside the range (-0x20000000000000, 0x20000000000000)", function () {
@@ -38,5 +38,23 @@ describe("Number.isInteger", function () {
         expect(Number.isInteger(+Infinity)).toBe(false);
         expect(Number.isInteger(-Infinity)).toBe(false);
         expect(Number.isInteger(NaN)).toBe(false);
+    });
+});
+
+describe("Number.isNaN", function () {
+    it("should give `true` when used on NaN", function () {
+        expect(Number.isNaN(NaN)).toBe(true);
+    });
+    it("should give `false` when used on regular numbers", function () {
+        expect(Number.isNaN(0)).toBe(false);
+        expect(Number.isNaN(Math.PI)).toBe(false);
+        expect(Number.isNaN(-0x20000000000001)).toBe(false);
+    });
+    it("should give `false` when used on +Infinity or -Infinity", function () {
+        expect(Number.isNaN(+Infinity)).toBe(false);
+        expect(Number.isNaN(-Infinity)).toBe(false);
+    });
+    it("should give `false` when used on 'not a number' (i.e., it should not coerce types)", function () {
+        expect(Number.isNaN('not a number')).toBe(false);
     });
 });

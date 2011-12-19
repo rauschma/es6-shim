@@ -76,6 +76,9 @@
             return Number.isFinite(value) &&
                    value > -INTEGER_CUTOFF && value < INTEGER_CUTOFF &&
                    Math.floor(value) === value;
+        },
+        isNaN: function (value) {
+            return typeof value === "number" && global.isNaN(value);
         }
     });
 
