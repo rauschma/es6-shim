@@ -68,10 +68,6 @@
 
     var INTEGER_CUTOFF = 0x20000000000000;
 
-    function sign(n) {
-        return n < 0 ? -1 : 1;
-    }
-
     methods(Number, {
         isFinite: function (value) {
             return typeof value === "number" && global.isFinite(value);
@@ -92,7 +88,7 @@
             if (n === 0 || !global.isFinite(n)) {
                 return n;
             }
-            return sign(n) * Math.floor(Math.abs(n));
+            return Math.sign(n) * Math.floor(Math.abs(n));
         }
     });
 
@@ -124,4 +120,24 @@
         });
         return descs;
     });
+
+    //----------------- Math
+    //// http://wiki.ecmascript.org/doku.php?id=harmony:more_math_functions
+    //// http://blogs.msdn.com/b/ie/archive/2011/11/22/evolving-ecmascript.aspx
+
+    methods(Math, {
+        sign: function (x) {
+            var n = +x;
+            if (n === 0) {
+                return n;
+            }
+
+            if (global.isNaN(n)) {
+                return NaN;
+            }
+
+            return x < 0 ? -1 : 1;
+        }
+    });
+
 }(this));
