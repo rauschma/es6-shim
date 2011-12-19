@@ -1,8 +1,11 @@
 describe("Object.is", function () {
-    it("should say primitives are the same when they obviously are", function () {
+    it("should say primitives are the same if and only if they obviously are", function () {
         expect(Object.is(0, 0)).toBe(true);
+        expect(Object.is(0, 1)).toBe(false);
         expect(Object.is(Math.PI, Math.PI)).toBe(true);
-        expect(Object.is("test", "test")).toBe(true);
+        expect(Object.is(Math.PI, -Math.PI)).toBe(false);
+        expect(Object.is("0", "0")).toBe(true);
+        expect(Object.is("0", 0)).toBe(false);
     });
     it("should say non-primitives are the same when they are referentially the same", function () {
         var anObject = {};
@@ -36,5 +39,18 @@ describe("Object.is", function () {
     });
     it("should distinguish between +Infinity and -Infinity", function () {
         expect(Object.is(+Infinity, -Infinity)).toBe(false);
+    });
+});
+
+describe("Object.isnt", function () {
+    it("Negates Object.is for simple cases", function () {
+        expect(Object.isnt(1, 2)).toBe(true);
+        expect(Object.isnt("0", 0)).toBe(true);
+        expect(Object.isnt(Math.PI, Math.PI)).toBe(false);
+    });
+
+    it("Negates Object.is for the edge cases", function () {
+        expect(Object.isnt(+0, -0)).toBe(true);
+        expect(Object.isnt(NaN, NaN)).toBe(false);
     });
 });
