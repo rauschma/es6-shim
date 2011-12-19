@@ -24,7 +24,7 @@ describe("Math.sign", function () {
         expect(Math.sign(-Infinity)).toReallyBe(-1);
     });
 
-    it("should give +1 for negative values", function () {
+    it("should give +1 for positive values", function () {
         expect(Math.sign(+1)).toReallyBe(+1);
         expect(Math.sign(+0x200000000000001)).toReallyBe(+1);
         expect(Math.sign(+Infinity)).toReallyBe(+1);
