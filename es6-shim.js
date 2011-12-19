@@ -66,9 +66,16 @@
     //// http://wiki.ecmascript.org/doku.php?id=harmony:number.isnan
     //// http://wiki.ecmascript.org/doku.php?id=harmony:number.tointeger
 
+    var INTEGER_CUTOFF = 0x20000000000000;
+
     methods(Number, {
         isFinite: function (value) {
             return typeof value === "number" && global.isFinite(value);
+        },
+        isInteger: function (value) {
+            return Number.isFinite(value) &&
+                   value > -INTEGER_CUTOFF && value < INTEGER_CUTOFF &&
+                   Math.floor(value) === value;
         }
     });
 
