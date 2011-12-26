@@ -1,4 +1,4 @@
-The code collected in this shim originates mainly from the ES-262 wiki.
+A shim for ECMAScript 6 functionality on ECMAScript 5.
 
-Warning: pre alpha, work in progress.
-
+Not actively maintained, any more. Instead, use Paul Miller’s fork:
+https://github.com/paulmillr/es6-shim
